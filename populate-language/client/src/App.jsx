@@ -16,6 +16,7 @@ const App = () => {
   
   const [socket] = useState( connectSocket() );
   const [online, setOnline] = useState();
+  const [languages, setLanguages] = useState();
 
   useEffect(() => {
     // console.log(socket)
@@ -34,6 +35,14 @@ const App = () => {
 
     socket.on('disconnect', () => {
       setOnline(false);
+    });
+
+  }, [ socket ]);
+
+  useEffect(() => {
+
+    socket.on('current-languages', (languages) => {
+      setLanguages(languages)
     });
 
   }, [ socket ]);
@@ -57,7 +66,7 @@ const App = () => {
 
       <div className='row'>
         <div className='col-8'>
-          <LanguageList />
+          <LanguageList data={ languages } />
         </div>
 
         <div className='col-4'>

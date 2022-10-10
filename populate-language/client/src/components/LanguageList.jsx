@@ -1,21 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 
-export const LanguageList = () => {
+export const LanguageList = ({ data }) => {
+
+  const [languages, setLanguages] = useState(data);
+
+  useEffect(() => {
+    setLanguages(data);
+  }, [ data ]);
+
+  const onChangeNameOfLanguage = (event, id) => {
+    const newName = event.target.value;
+
+    setLanguages(languages?.map(language => {
+      if( language.id === id ) {
+        language.name = newName;
+      }
+        return language;
+    }));
+  }
+  
+  const onLostFocus = ( id, name ) => {
+    console.log(id, name);
+
+    //TODO: Dispatch event of sockets
+  }
 
   const createRows = () => {
-
     return (
-      <tr>
-        <td> <button className='btn btn-primary'>+1</button> </td>
-        <td> <input className='form-control' /> </td>
-        <td>21</td>
-        <td> <button className='btn btn-danger'>Delete</button> </td>
-      </tr>
+      languages?.map(language => (
+        <tr key={ language.id }>
+          <td> <button className='btn btn-primary'>+1</button> </td>
+          <td> <input 
+            className='form-control'
+            value={language.name}
+            onChange={ (event) => onChangeNameOfLanguage( event, language.id ) }
+            onBlur={ () => onLostFocus(language.id, language.name) }
+          /> </td>
+          <td>{ language.votes }</td>
+          <td> <button className='btn btn-danger'>Delete</button> </td>
+        </tr>
+      ))
     );
   }
 
   return (
-    <div>
+    <>
       <table className='table table-stripped'>
         <thead>
           <tr>
@@ -29,6 +58,6 @@ export const LanguageList = () => {
         </tbody>
       </table>
 
-    </div>
+    </>
   )
 }
