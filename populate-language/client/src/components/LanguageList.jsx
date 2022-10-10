@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const LanguageList = ({ data, voteLanguage, deleteLanguage }) => {
+export const LanguageList = ({ data, voteLanguage, deleteLanguage, changeNameLanguage }) => {
 
   const [languages, setLanguages] = useState(data);
 
@@ -20,9 +20,7 @@ export const LanguageList = ({ data, voteLanguage, deleteLanguage }) => {
   }
   
   const onLostFocus = ( id, name ) => {
-    console.log(id, name);
-
-    //TODO: Dispatch event of sockets
+    changeNameLanguage( id, name )
   }
 
   const createRows = () => {

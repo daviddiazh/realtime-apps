@@ -30,6 +30,12 @@ class Sockets {
 
                 this.io.emit('current-languages', this.languageList.getLanguages());
             })
+
+            socket.on('update-name', ({id, name}) => {
+                this.languageList.changeLanguageName(id, name);
+
+                this.io.emit('current-languages', this.languageList.getLanguages());
+            })
         });
     }
 

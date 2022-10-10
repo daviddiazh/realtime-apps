@@ -54,6 +54,10 @@ const App = () => {
   const deleteLanguage = ( id ) => {
     socket.emit('remove-language', id);
   }
+
+  const changeNameLanguage = (id, name) => {
+    socket.emit('update-name', {id, name})
+  }
   
   return (
     <div className='container'>
@@ -78,6 +82,7 @@ const App = () => {
             data={ languages }
             voteLanguage={ voteLanguage }
             deleteLanguage={ deleteLanguage }
+            changeNameLanguage={ changeNameLanguage }
           />
         </div>
 
