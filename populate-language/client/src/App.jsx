@@ -1,15 +1,53 @@
-import React from 'react'
-import { AddLanguage } from './components/AddLanguage'
-import { LanguageList } from './components/LanguageList'
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client'; //npm i socket.io-client@3.0.1
+
+import { AddLanguage } from './components/AddLanguage';
+import { LanguageList } from './components/LanguageList';
+
+const connectSocket = () => {
+  const socket = io.connect('http://localhost:8080', {
+    transports: ['websocket']
+  });
+
+  return socket;
+}
 
 const App = () => {
+  
+  const [socket] = useState( connectSocket() );
+  const [online, setOnline] = useState();
+
+  useEffect(() => {
+    // console.log(socket)
+    setOnline( socket.connected );
+  }, [ socket ]);
+
+  useEffect(() => {
+
+    socket.on('connect', () => {
+      setOnline(true);
+    });
+
+  }, [ socket ]);
+
+  useEffect(() => {
+
+    socket.on('disconnect', () => {
+      setOnline(false);
+    });
+
+  }, [ socket ]);
+  
   return (
     <div className='container'>
       <div className='alert text-center'>
         <p>
           Service Status:
-          <span className='text-success'> Online</span>
-          <span className='text-danger'> Offline</span>
+          {
+            online 
+            ? <span className='text-success'> Online</span>
+            : <span className='text-danger'> Offline</span>
+          }
         </p>
       </div>
 
