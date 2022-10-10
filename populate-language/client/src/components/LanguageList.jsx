@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const LanguageList = ({ data }) => {
+export const LanguageList = ({ data, voteLanguage }) => {
 
   const [languages, setLanguages] = useState(data);
 
@@ -29,7 +29,14 @@ export const LanguageList = ({ data }) => {
     return (
       languages?.map(language => (
         <tr key={ language.id }>
-          <td> <button className='btn btn-primary'>+1</button> </td>
+          <td> 
+            <button 
+              className='btn btn-primary'
+              onClick={ () => voteLanguage(language.id) }
+            >
+              +1
+            </button> 
+          </td>
           <td> <input 
             className='form-control'
             value={language.name}

@@ -27,6 +27,7 @@ class LanguageList {
 
     increaseVotes(id) {
         this.languages = this.languages.map( language => {
+            
             if(language.id === id) {
                 language.votes += 1;
             }

@@ -46,6 +46,10 @@ const App = () => {
     });
 
   }, [ socket ]);
+
+  const voteLanguage = (id) => {
+    socket.emit('vote-language', id)
+  }
   
   return (
     <div className='container'>
@@ -66,7 +70,10 @@ const App = () => {
 
       <div className='row'>
         <div className='col-8'>
-          <LanguageList data={ languages } />
+          <LanguageList 
+            data={ languages }
+            voteLanguage={voteLanguage}
+          />
         </div>
 
         <div className='col-4'>
