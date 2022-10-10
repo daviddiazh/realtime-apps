@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const LanguageList = ({ data, voteLanguage }) => {
+export const LanguageList = ({ data, voteLanguage, deleteLanguage }) => {
 
   const [languages, setLanguages] = useState(data);
 
@@ -32,7 +32,7 @@ export const LanguageList = ({ data, voteLanguage }) => {
           <td> 
             <button 
               className='btn btn-primary'
-              onClick={ () => voteLanguage(language.id) }
+              onClick={ () => voteLanguage( language.id ) }
             >
               +1
             </button> 
@@ -44,7 +44,14 @@ export const LanguageList = ({ data, voteLanguage }) => {
             onBlur={ () => onLostFocus(language.id, language.name) }
           /> </td>
           <td>{ language.votes }</td>
-          <td> <button className='btn btn-danger'>Delete</button> </td>
+          <td> 
+            <button 
+              className='btn btn-danger'
+              onClick={ () => deleteLanguage( language.id ) }
+            >
+              Delete
+            </button> 
+          </td>
         </tr>
       ))
     );

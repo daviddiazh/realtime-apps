@@ -23,6 +23,12 @@ class Sockets {
                 this.languageList.increaseVotes(id);
 
                 this.io.emit('current-languages', this.languageList.getLanguages()); // Return to client side languages updated
+            });
+
+            socket.on('remove-language', (id) => {
+                this.languageList.removeLanguage(id);
+
+                this.io.emit('current-languages', this.languageList.getLanguages());
             })
         });
     }

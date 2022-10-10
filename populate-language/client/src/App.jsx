@@ -41,14 +41,18 @@ const App = () => {
 
   useEffect(() => {
 
-    socket.on('current-languages', (languages) => {
+    socket.on('current-languages', ( languages ) => {
       setLanguages(languages)
     });
 
   }, [ socket ]);
 
-  const voteLanguage = (id) => {
-    socket.emit('vote-language', id)
+  const voteLanguage = ( id ) => {
+    socket.emit('vote-language', id);
+  }
+
+  const deleteLanguage = ( id ) => {
+    socket.emit('remove-language', id);
   }
   
   return (
@@ -72,7 +76,8 @@ const App = () => {
         <div className='col-8'>
           <LanguageList 
             data={ languages }
-            voteLanguage={voteLanguage}
+            voteLanguage={ voteLanguage }
+            deleteLanguage={ deleteLanguage }
           />
         </div>
 

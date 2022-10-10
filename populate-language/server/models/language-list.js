@@ -18,7 +18,7 @@ class LanguageList {
     }
 
     removeLanguage ( id ) {
-        this.languages.filter( language => language.id !== id );
+        this.languages = this.languages.filter( language => language.id !== id );
     }
 
     getLanguages () {
@@ -27,7 +27,7 @@ class LanguageList {
 
     increaseVotes(id) {
         this.languages = this.languages.map( language => {
-            
+
             if(language.id === id) {
                 language.votes += 1;
             }
