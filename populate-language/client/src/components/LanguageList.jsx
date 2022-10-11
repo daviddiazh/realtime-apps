@@ -23,6 +23,10 @@ export const LanguageList = ({ data, voteLanguage, deleteLanguage, changeNameLan
     changeNameLanguage( id, name )
   }
 
+  const onSubmit = (e,) => {
+    e.preventDefault();
+  }
+
   const createRows = () => {
     return (
       languages?.map(language => (
@@ -35,12 +39,16 @@ export const LanguageList = ({ data, voteLanguage, deleteLanguage, changeNameLan
               +1
             </button> 
           </td>
-          <td> <input 
-            className='form-control'
-            value={language.name}
-            onChange={ (event) => onChangeNameOfLanguage( event, language.id ) }
-            onBlur={ () => onLostFocus(language.id, language.name) }
-          /> </td>
+          <td> 
+            <form onSubmit={ (e) => onSubmit( e ) }>
+              <input 
+                className='form-control'
+                value={language.name}
+                onChange={ (event) => onChangeNameOfLanguage( event, language.id ) }
+                onBlur={ () => onLostFocus(language.id, language.name) }
+              />
+            </form>
+          </td>
           <td>{ language.votes }</td>
           <td> 
             <button 

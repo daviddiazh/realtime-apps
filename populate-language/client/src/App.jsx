@@ -58,6 +58,10 @@ const App = () => {
   const changeNameLanguage = (id, name) => {
     socket.emit('update-name', {id, name})
   }
+
+  const addNewLanguage = ( name ) => {
+    socket.emit('add-language', name)
+  }
   
   return (
     <div className='container'>
@@ -87,7 +91,9 @@ const App = () => {
         </div>
 
         <div className='col-4'>
-          <AddLanguage />
+          <AddLanguage
+            addNewLanguage={ addNewLanguage }
+          />
         </div>
       </div>
 

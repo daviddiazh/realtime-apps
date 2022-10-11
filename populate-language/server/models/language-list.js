@@ -12,6 +12,7 @@ class LanguageList {
 
     addLanguage ( name ) {
         const newLanguage = new Language( name );
+
         this.languages.push( newLanguage );
 
         return this.languages;
